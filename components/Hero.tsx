@@ -91,7 +91,7 @@ const Hero: React.FC = () => {
                      
                      <div className="absolute inset-0 flex items-center justify-center">
                         <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-3xl text-center shadow-2xl">
-                            <h3 className="text-white font-black text-3xl">Omzet Naik 🚀</h3>
+                            <h3 className="text-white font-black text-3xl">Omzet Naik</h3>
                             <p className="text-slate-200 text-base mt-3 font-medium">Pantau jualan tanpa ribet!</p>
                         </div>
                      </div>

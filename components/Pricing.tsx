@@ -37,7 +37,7 @@ const Pricing: React.FC = () => {
 
   const tiers = [
     {
-      name: '🌱 Wargi',
+      name: 'Wargi',
       description: 'POS Dasar untuk usaha keluarga',
       priceRaw: 0,
       features: [
@@ -57,7 +57,7 @@ const Pricing: React.FC = () => {
       popular: false,
     },
     {
-      name: '🔥 Sadulur',
+      name: 'Sadulur',
       description: 'POS lengkap untuk usaha berkembang',
       priceRaw: 49000,
       features: [
@@ -76,7 +76,7 @@ const Pricing: React.FC = () => {
       popular: true,
     },
     {
-      name: '🚀 Batur',
+      name: 'Batur',
       description: 'POS profesional untuk multi outlet',
       priceRaw: 99000,
       features: [
@@ -92,7 +92,7 @@ const Pricing: React.FC = () => {
       popular: false,
     },
     {
-      name: '🏔 Pangadeg',
+      name: 'Pangadeg',
       description: 'Solusi enterprise & custom',
       priceRaw: -1, // Special code for custom
       features: [
