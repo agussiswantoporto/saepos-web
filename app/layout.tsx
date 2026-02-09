@@ -1,22 +1,27 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Sae Pos - Aplikasi Kasir Terintegrasi',
-  description: 'Urus bisnis jadi lebih santuy & cuan. Sae Pos bantuin kamu ngurus kasir, stok, sampe laporan keuangan sambil rebahan.',
+  title: "Sae Pos - Aplikasi Kasir Terintegrasi",
+  description:
+    "Urus bisnis jadi lebih santuy & cuan. Sae Pos bantuin kamu ngurus kasir, stok, sampe laporan keuangan sambil rebahan.",
   icons: {
-    icon: '/favicon.ico',
+    icon: "/favicon.ico",
   },
-}
+};
+
+import QueryProvider from "@/components/providers/query-provider";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="id">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
-  )
+  );
 }

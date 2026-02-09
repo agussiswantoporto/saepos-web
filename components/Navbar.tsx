@@ -1,19 +1,33 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ShoppingBag } from 'lucide-react';
-import { NavItem } from '../types';
+import React, { useState, useEffect } from "react";
+import { Menu, X, ShoppingBag } from "lucide-react";
+import { NavItem } from "../types";
 
-import Image from 'next/image'
+import Image from "next/image";
 
-const navItems: NavItem[] = [
-  { label: 'Beranda', href: '#home' },
-  { label: 'Fitur', href: '#features' },
-  { label: 'Harga', href: '#pricing' },
-  { label: 'Kontak', href: '#contact' },
+const defaultNavItems: NavItem[] = [
+  { label: "Beranda", href: "#home" },
+  { label: "Fitur", href: "#features" },
+  { label: "Harga", href: "#pricing" },
+  { label: "Kontak", href: "#contact" },
 ];
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  navigation?: Array<{
+    id: number;
+    label: string;
+    href: string;
+    order: number;
+  }>;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ navigation }) => {
+  const navItems =
+    navigation?.map((item) => ({
+      label: item.label,
+      href: item.href,
+    })) || defaultNavItems;
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -21,16 +35,19 @@ const Navbar: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     e.preventDefault();
     setIsOpen(false);
-    
-    if (href.startsWith('#')) {
-      const targetId = href.replace('#', '');
+
+    if (href.startsWith("#")) {
+      const targetId = href.replace("#", "");
       const element = document.getElementById(targetId);
       if (element) {
         const headerOffset = 80;
@@ -39,24 +56,36 @@ const Navbar: React.FC = () => {
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
     }
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-xl shadow-sm py-3' : 'bg-transparent py-5'}`}>
+    <nav
+      className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? "bg-white/80 backdrop-blur-xl shadow-sm py-3" : "bg-transparent py-5"}`}
+    >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex justify-between items-center h-14">
-          <div className="flex-shrink-0 flex items-center gap-3 cursor-pointer" onClick={scrollToTop}>
-            <Image src="/logo.png" alt="Sae POS" width={150} height={60} className="h-auto" priority />
+          <div
+            className="flex-shrink-0 flex items-center gap-3 cursor-pointer"
+            onClick={scrollToTop}
+          >
+            <Image
+              src="/logo.png"
+              alt="Sae POS"
+              width={150}
+              height={60}
+              className="h-auto"
+              priority
+            />
           </div>
-          
+
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-2">
               {navItems.map((item) => (
@@ -69,16 +98,16 @@ const Navbar: React.FC = () => {
                   {item.label}
                 </a>
               ))}
-              <a 
+              <a
                 href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
+                onClick={(e) => handleNavClick(e, "#contact")}
                 className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-primary-500/40 hover:shadow-xl hover:shadow-primary-500/50 hover:-translate-y-0.5 cursor-pointer ml-2"
               >
                 Coba Gratis
               </a>
             </div>
           </div>
-          
+
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -104,13 +133,13 @@ const Navbar: React.FC = () => {
                 {item.label}
               </a>
             ))}
-             <a 
-                href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
-                className="w-full text-center mt-3 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white block px-4 py-3 rounded-xl text-base font-semibold cursor-pointer shadow-lg shadow-primary-500/30 transition-all"
-              >
-                Coba Gratis
-              </a>
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
+              className="w-full text-center mt-3 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white block px-4 py-3 rounded-xl text-base font-semibold cursor-pointer shadow-lg shadow-primary-500/30 transition-all"
+            >
+              Coba Gratis
+            </a>
           </div>
         </div>
       )}
