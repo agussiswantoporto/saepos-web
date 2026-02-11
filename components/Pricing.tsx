@@ -162,16 +162,18 @@ const Pricing: React.FC<PricingProps> = ({ plans: dynamicPlans }) => {
           {plansToDisplay.map((tier: any) => {
             const price =
               tier.priceRaw !== undefined ? tier.priceRaw : tier.monthlyPrice;
+            const isPopular = tier.isPopular ?? tier.popular;
+
             return (
               <div
                 key={tier.name}
-                className={`relative flex flex-col p-8 bg-white rounded-3xl shadow-xl border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${
-                  tier.popular
-                    ? "border-primary-500 ring-4 ring-primary-500/20 scale-105 z-10"
-                    : "border-slate-200"
+                className={`relative flex flex-col p-8 rounded-3xl shadow-xl border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${
+                  isPopular
+                    ? "bg-primary-50/30 border-primary-500 ring-4 ring-primary-500/20 scale-105 z-10"
+                    : "bg-white border-slate-200"
                 }`}
               >
-                {tier.popular && (
+                {isPopular && (
                   <div className="absolute -top-5 left-0 right-0 mx-auto w-32">
                     <div className="rounded-full bg-primary-500 px-4 py-2 text-xs font-black text-white uppercase tracking-wider shadow-lg text-center">
                       Popular
@@ -209,7 +211,7 @@ const Pricing: React.FC<PricingProps> = ({ plans: dynamicPlans }) => {
                         >
                           {isIncluded ? (
                             <Check
-                              className="flex-shrink-0 w-5 h-5 text-green-500 mt-0.5"
+                              className={`flex-shrink-0 w-5 h-5 mt-0.5 ${isPopular ? "text-primary-600" : "text-green-500"}`}
                               strokeWidth={2.5}
                               aria-hidden="true"
                             />
@@ -252,7 +254,7 @@ const Pricing: React.FC<PricingProps> = ({ plans: dynamicPlans }) => {
                   href="#contact"
                   onClick={(e) => handleScroll(e, "contact")}
                   className={`mt-10 block w-full py-4 px-6 border-2 border-transparent rounded-2xl text-center font-bold text-base cursor-pointer transition-all ${
-                    tier.popular
+                    isPopular
                       ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 shadow-xl shadow-primary-500/40 hover:shadow-2xl hover:-translate-y-1"
                       : "bg-slate-100 text-slate-900 hover:bg-slate-200 border-slate-200"
                   }`}
